@@ -35,6 +35,14 @@ getPermalinkSetting = function (model, attributes, options) {
     });
 };
 
+publishToGitHub = function() {
+	var spawn = require('child_process').spawn;
+	function shspawn(command) {
+		spawn('sh', ['-c', command], { stdio: 'inherit' });
+	} 
+	shspawn('./deploy.sh');
+}
+
 Post = ghostBookshelf.Model.extend({
 
     tableName: 'posts',
@@ -88,7 +96,9 @@ Post = ghostBookshelf.Model.extend({
                 sitemap.pageDeleted(model);
                 sitemap.postAdded(model);
             }
-        });
+        
+            publishToGitHub();
+	});
         this.on('destroyed', function (model) {
             var isPage = !!model.get('page');
             if (isPage) {
