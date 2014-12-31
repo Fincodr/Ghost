@@ -4,6 +4,7 @@
 // Block helper designed for looping through posts
 
 var hbs             = require('express-hbs'),
+    _		    = require('lodash'),
     foreach;
 
 foreach = function (context, options) {
@@ -12,9 +13,14 @@ foreach = function (context, options) {
         i = 0,
         j = 0,
         columns = options.hash.columns,
+        sortkey = options.hash.sortkey,
         key,
         ret = '',
         data;
+
+    if (sortkey) {
+      	context = _.sortBy(context, sortkey);
+    }
 
     if (options.data) {
         data = hbs.handlebars.createFrame(options.data);
