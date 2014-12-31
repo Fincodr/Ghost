@@ -6,13 +6,14 @@ var _               = require('lodash'),
     pingList;
 
 // ToDo: Make this configurable
-pingList = [{
+pingList = [];
+/*[{
     host: 'blogsearch.google.com',
     path: '/ping/RPC2'
 }, {
     host: 'rpc.pingomatic.com',
     path: '/'
-}];
+}];*/
 
 function ping(post) {
     var pingXML,
